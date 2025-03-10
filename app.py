@@ -22,9 +22,12 @@ def run_script():
         soup = BeautifulSoup(response.text, "html.parser")
         text = ' '.join(soup.get_text().split())
 
-        emails = re.findall(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', text)
+        # Apply regex to extract email addresses
+        email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+        emails = re.findall(email_pattern, text)
 
-        return jsonify({"emails": "\n".join(emails) if emails else "No emails found"})
+        # Return emails as plain text, each on a new line
+        return '\n'.join(emails)
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
 
