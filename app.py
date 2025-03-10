@@ -23,7 +23,7 @@ def run_script():
         text = ' '.join(soup.get_text().split())
 
         # Apply regex to extract email addresses
-        email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+        email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b'
         emails = re.findall(email_pattern, text)
 
         # Return emails as plain text, each on a new line
